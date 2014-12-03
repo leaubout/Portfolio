@@ -37,7 +37,7 @@ class Model_Mapper_User
             unset($row[Model_DbTable_User::COL_ID]);
             return $this->getDbTable()->insert($row);
         }else{
-            $where = array(Model_DbTable_User::COL_ID => $user->getId());
+            $where = array(Model_DbTable_User::COL_ID . ' = ?'  => $user->getId());
             return $this->getDbTable()->update($row, $where);
         }
     }
