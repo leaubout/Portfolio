@@ -14,7 +14,7 @@ class Form_Contact extends Zend_Form
            'filters' => array('alnum'),
            'validators' => array(
                 array(
-                    'validators' =>'alpha',
+                    'validator' =>'alpha',
                     'options' => array(
                         'allowWhiteSpace' => true
                     )
