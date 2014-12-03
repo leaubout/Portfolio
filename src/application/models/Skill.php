@@ -8,13 +8,16 @@ class Model_Skill
     private $level;
     private $experience;
 
-    public function __construct(array $data)
+    public function __construct(array $data = null)
     {
-        foreach($data as $key => $value){
-            $methodName = 'set' . ucfirst($key);
-            if (method_exists($this, $methodName)){
-                $this->$methodName($value);
-            }
+       
+        if ($data != null){
+            foreach($data as $key => $value){
+                $methodName = 'set' . ucfirst($key);
+                if (method_exists($this, $methodName)){
+                    $this->$methodName($value);
+                }
+            }            
         }
     }
     
@@ -32,6 +35,7 @@ class Model_Skill
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
     
     /**
@@ -39,7 +43,11 @@ class Model_Skill
      */
     public function getCategory()
     {
-        return $this->category;
+        return $this->category->getName();
+    }
+    
+    public function getIdCategory(){
+        return $this->category->getId();
     }
     
     /**
@@ -50,6 +58,7 @@ class Model_Skill
         $mapperCategory = new Model_Mapper_Category();
         $this->category = $mapperCategory->getById($idCategory);
         return $this;
+       
     }
     
 	/**
@@ -102,5 +111,4 @@ class Model_Skill
         $this->experience = $experience;
         return $this;
     }
-
 }

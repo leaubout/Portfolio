@@ -10,7 +10,7 @@ class Model_Mapper_Category
     );
     
     public function getById($id){
-        if (array_key_exists($id, $tabCategories)){
+        if (array_key_exists($id, $this->tabCategories)){
             $category = new Model_Category($id, $this->tabCategories[$id]);
         } else {
             $category = null;
