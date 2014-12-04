@@ -16,7 +16,7 @@ class Form_Skill_Add extends Zend_Form
         )); 
 
         $mapperCategory = new Model_Mapper_Category();
-        $select->addMultiOptions($mapperCategory->getlist());
+        $select->addMultiOptions($mapperCategory->fetchAll());
         /*
         $select->addMultiOption('1','technologies')
                ->addMultiOption('2','langages')
@@ -40,7 +40,7 @@ class Form_Skill_Add extends Zend_Form
         $this->addElement('text', 'level', array(
             'label' => 'Niveau',
             'required' => true,
-            'validators' => array(new Zend_Validate_Alnum(array('allowWhiteSpace' => true))),
+            //'validators' => array(new Zend_Validate_Alnum())),
             'order' => 3
         ));
         

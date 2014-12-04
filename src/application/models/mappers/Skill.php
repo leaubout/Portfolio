@@ -24,7 +24,7 @@ class Model_Mapper_Skill
     {
         return array(
             Model_DbTable_Skill::COL_ID => $skill->getId(),
-            Model_DbTable_Skill::COL_ID_CATEGORY => $skill->getIdCategory(),
+            Model_DbTable_Skill::COL_ID_CATEGORY => $skill->getCategory()->getId(),
             Model_DbTable_Skill::COL_DESCRIPTION => $skill->getDescription(),
             Model_DbTable_Skill::COL_LEVEL => $skill->getLevel(),
             Model_DbTable_Skill::COL_EXPERIENCE => $skill->getExperience()

@@ -9,7 +9,11 @@ class SkillController extends Zend_Controller_Action
     }
     
     public function indexAction(){
-        
+        $this->forward('list');
+/*        $this->redirect($this->view->url(array(
+            'controller' => 'skill',
+            'action' => 'list'
+        ), null));*/        
     }
     
     public function addAction(){
@@ -23,8 +27,7 @@ class SkillController extends Zend_Controller_Action
                 } else {
                     $this->view->priorityMessenger('Problème lors de l\'enregistrement de la compétence.', 'warning');
                 }
-                //$this->view->
-                $this->redirect($this->view->url(array(), '/skill/list'));
+                $this->redirect($this->view->url(array(), 'skillList'));
             }
         }
         
@@ -59,7 +62,7 @@ class SkillController extends Zend_Controller_Action
         } else {
             $form->populate(array(
                 'id' => $skill->getId(),
-                'category' => $skill->getIdCategory(),
+                'category' => $skill->getCategory()->getId(),
                 'description' => $skill->getDescription(),
                 'level' => $skill->getLevel(),
                 'experience' => $skill->getExperience()

@@ -1,0 +1,15 @@
+<div class="coverflow">
+    <div class="cover">A</div>
+    <div class="cover">B</div>
+    ...
+    <div class="cover">Y</div>
+    <div class="cover">Z</div>
+</div>
+
+<script>
+<?php $this->inlineScript()->captureStart();?>
+    $(function() {
+        $('.coverflow').coverflow();
+    });
+<?php $this->inlineScript()->captureEnd();?>    
+</script>

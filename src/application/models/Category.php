@@ -6,7 +6,7 @@ class Model_Category
     private $name;
 
     public function __construct($id, $name){
-        $this->id = $id;
+        $this->setId($id);
         $this->name = $name;
     }    
     

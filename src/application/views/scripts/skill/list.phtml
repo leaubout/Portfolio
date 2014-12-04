@@ -42,17 +42,10 @@ $this->inlineScript()->appendFile("/assets/datatables/media/js/jquery.dataTables
     </tfoot>    
     <tbody>
     <?php foreach ($this->skills as $skill) : ?>
-        <?php 
-            if(strlen($skill->getDescription())> 50) :
-                    $parti1 = substr($skill->getDescription(), 0 , 50);
-                    $parti2 = substr($skill->getDescription(), 51);
-                    $description = $parti1 . ' <span class="more">...</span>' . '<div style="display:none">' . $parti2 . ' <span class="less">hide</span></div>';
-            endif;
-        ?>
         <tr>
             <td><?= $skill->getId()?></td>
-            <td><?= $skill->getCategory()?></td>
-            <td style="width:200px;"><?= $description?></td>
+            <td><?= $skill->getCategory()->getName()?></td>
+            <td style="width:200px;"><?= $this->moreLess($skill->getDescription())?></td>
             <td><?= $skill->getLevel()?></td>
             <td><?= $skill->getExperience()?></td>
             <td><a href="<?= $this->url(array('id' => $skill->getId()), 'skillEdit')?>" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-pencil"></span> Editer</a>
@@ -66,19 +59,18 @@ $this->inlineScript()->appendFile("/assets/datatables/media/js/jquery.dataTables
 <?php $this->inlineScript()->captureStart() ?>
 $(document).ready(function() {
 	$('#skills').dataTable();
-	$('.more,.less').css('display', 'inline-block');
-  $('.more,.less').css('border', 'black 1px solid');
-  $('.more,.less').css('background-color', '#CAD6D6');  
-
-  $('.more + div')
-	
-	// '<span class="more">...<span>' . '<div style="display:none">' . $parti2 . '<span class="less">hide</span></div>';
-	$('.more').click(function(){
-		  $(this).parent().find('div').css('display', 'block');
-		  $(this).css('display','none');
+	$('#skills span.label').click(function(){
+		  var div = $(this).parent().find('span:first-child');
+		  div.toggle();
+		  if (div.is(":visible")){
+			    $(this).text('LESS');
+		  } else {
+			    $(this).text('MORE');
+		  }    
 	});
 
-	$('.less').click(function(){
+	$('#skills div span.label').click(function(){
+		  $(this).parent().hide();
 		  $('.more + div').css('display', 'none');
 		  $('.more').css('display', 'inline-block');
 	});	

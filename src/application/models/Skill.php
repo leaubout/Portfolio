@@ -2,10 +2,30 @@
 
 class Model_Skill
 {
+    /**
+     * 
+     * @var integer
+     */
     private $id;
+    /**
+     * 
+     * @var Model_Category
+     */
     private $category;
+    /**
+     * 
+     * @var string
+     */
     private $description;
+    /**
+     * 
+     * @var string
+     */
     private $level;
+    /**
+     * 
+     * @var string
+     */
     private $experience;
 
     public function __construct(array $data = null)
@@ -38,16 +58,17 @@ class Model_Skill
         return $this;
     }
     
-    /**
-     * @return the $category
-     */
-    public function getCategory()
+    public function getCategory(){
+        return $this->category;
+    }
+    
+    public function getNameCategory()
     {
-        return $this->category->getName();
+        return $this->getCategory()->getName();
     }
     
     public function getIdCategory(){
-        return $this->category->getId();
+        return $this->getCategory()->getId();
     }
     
     /**
