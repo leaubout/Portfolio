@@ -16,20 +16,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //$acl->addResource('other-work');
         $acl->addResource('skill');
         //$acl->addResource('progress');
-        $acl->addResource('authentification');
+        $acl->addResource('auth');
         $acl->addResource('contact');
             
         
         //AddRules
-        $acl->allow('guest','authentification', 'login');
+        $acl->allow('guest','auth', 'login');
         $acl->allow('guest',
             array('web', 'skill'),
             array('read')
         );
         $acl->allow('guest', 'contact', 'send');
         
-        $acl->deny('curious', 'authentification', 'login');
-        $acl->allow('curious', 'authentification', 'logout');
+        $acl->deny('curious', 'auth', 'login');
+        $acl->allow('curious', 'auth', 'logout');
         $acl->allow(
             'curious', 
             array('web', 'skill'), 

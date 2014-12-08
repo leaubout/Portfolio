@@ -5,6 +5,7 @@ class SkillController extends Zend_Controller_Action
     private $skillApi;
     
     public function init(){
+        $storage = $user->getStorage();
         $this->skillApi = new Service_Skill();
     }
     
