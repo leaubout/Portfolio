@@ -3,12 +3,19 @@
 class AuthController extends Zend_Controller_Action
 {
     protected $auth;
+    protected $userAuth;
     
     public function init(){
         $this->auth = Zend_Auth::getInstance();
+        if($this->auth->hasIdentity()){
+            $this->userAuth = $this->auth->getIdentity();
+        } else {
+            $this->userAuth = new Model_User();
+        }
     }
     
     public function indexAction(){
+        var_dump($this->auth->hasIdentity());
         if ($this->auth->hasIdentity()){
             $this->forward('logout');
         } else {
@@ -18,8 +25,16 @@ class AuthController extends Zend_Controller_Action
     }
     
     public function loginAction(){
-        //$this->auth = TRUE;
         $form = new Form_Login();
+        
+        /* @var $acl Zend_Acl */
+        $acl = Zend_REgistry::get('Zend_Acl');
+        if (!$acl->isAllowed($this->userAuth->getRoleId(), 'authentification', 'login')){
+            throw new Zend_Acl_Exception('Utilisateur : ' . $this->userAuth->getRoleId()
+                .' -- Resource : authentification'
+                .' -- Privilege : login'
+            );
+        }
         
         if ($this->getRequest()->isPost()){
             if ($form->isValid($this->getRequest()->getPost())){
@@ -45,6 +60,12 @@ class AuthController extends Zend_Controller_Action
                     $service = new Service_User();
                     $user = $service->authenticate($adapter->getResultRowObject(null, 'password'));
                     
+                    if($user->getId() == 1){
+                        $user->setRoleId('admin');
+                    } else {
+                        $user->setRoleId('curious');
+                    }
+                    
                     $storage->write($user);
                 }
                 
@@ -65,7 +86,21 @@ class AuthController extends Zend_Controller_Action
     }
     
     public function logoutAction(){
-        //var_dump('déconnexion');exit;
+
+        $acl = Zend_REgistry::get('Zend_Acl');
+        
+        if (!$acl->isAllowed($this->userAuth->getRoleId(), 'authentification', 'logout')){
+            throw new Zend_Acl_Exception('Utilisateur : ' . $this->userAuth->getRoleId()
+                .' -- Resource : authentification'
+                .' -- Privilege : logout'
+            );
+        }
+        
+        $this->_helper->viewRenderer->setNoRender(TRUE);
+        
         $this->view->priorityMessenger('Déconnexion.', 'warning');
+        $this->auth->clearIdentity();
+        
+        $this->redirect($this->view->url(array(), 'indexIndex'));
     }
 } 
