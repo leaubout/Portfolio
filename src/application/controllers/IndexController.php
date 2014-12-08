@@ -12,8 +12,11 @@ class IndexController extends Zend_Controller_Action
         /* @var $acl Zend_Acl */
         $acl = Zend_Registry::get('Zend_Acl');
         
+        
+        /*
         var_dump($acl->isAllowed('guest', 'someResource','display'));
         var_dump($acl->isAllowed('guest', 'someResource','notDisplay'));
+        */
         
     }
 }
