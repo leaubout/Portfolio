@@ -10,7 +10,7 @@ class Plugin_AccessHandler extends Zend_Controller_Plugin_Abstract
         
         if(! $errors || ! $errors instanceof ArrayObject){
             $this->auth = Zend_Auth::getInstance();
-            $this->_handleAccess($request);
+            //$this->_handleAccess($request);
         }
         
     }
