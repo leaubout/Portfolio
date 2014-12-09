@@ -15,7 +15,7 @@ class AuthController extends Zend_Controller_Action
     }
     
     public function indexAction(){
-        var_dump($this->auth->hasIdentity());
+        
         if ($this->auth->hasIdentity()){
             $this->forward('logout');
         } else {
@@ -29,7 +29,7 @@ class AuthController extends Zend_Controller_Action
         
         /* @var $acl Zend_Acl */
         $acl = Zend_REgistry::get('Zend_Acl');
-        if (!$acl->isAllowed($this->userAuth->getRoleId(), 'authentification', 'login')){
+        if (!$acl->isAllowed($this->userAuth->getRoleId(), 'auth', 'login')){
             throw new Zend_Acl_Exception('Utilisateur : ' . $this->userAuth->getRoleId()
                 .' -- Resource : authentification'
                 .' -- Privilege : login'
@@ -89,7 +89,7 @@ class AuthController extends Zend_Controller_Action
 
         $acl = Zend_REgistry::get('Zend_Acl');
         
-        if (!$acl->isAllowed($this->userAuth->getRoleId(), 'authentification', 'logout')){
+        if (!$acl->isAllowed($this->userAuth->getRoleId(), 'auth', 'logout')){
             throw new Zend_Acl_Exception('Utilisateur : ' . $this->userAuth->getRoleId()
                 .' -- Resource : authentification'
                 .' -- Privilege : logout'

@@ -11,6 +11,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $acl->addRole('admin', 'curious');
         
         //AddResource
+        $acl->addResource('index');
         $acl->addResource('user');
         $acl->addResource('web');
         //$acl->addResource('other-work');
@@ -22,6 +23,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         //AddRules
         $acl->allow('guest','auth', 'login');
+        $acl->allow('guest', 'auth', 'index');
+        $acl->allow('guest', 'index', 'index');
         $acl->allow('guest',
             array('web', 'skill'),
             array('read')
@@ -39,8 +42,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         $acl->allow(
             'admin', 
-            array('web', 'skill'), 
-            array('create', 'update', 'delete')
+            array('web', 'skill'), // array('web', 'skill', 'otherwork', 'progress')
+            array('add', 'edit', 'delete')
         );
         $acl->allow(
             'admin',

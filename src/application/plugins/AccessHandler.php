@@ -37,7 +37,7 @@ class Plugin_AccessHandler extends Zend_Controller_Plugin_Abstract
         }
         
         if (! $acl->isAllowed($this->userAuth, $controller, $action)){
-            throw new Zend_Acl_Exception(); 
+            throw new Zend_Acl_Exception($this->userAuth->getRoleId() . ' -- ' . $controller . ' -- ' . $action); 
         }
     }
 }
