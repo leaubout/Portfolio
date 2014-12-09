@@ -23,15 +23,22 @@ class ErrorController extends Zend_Controller_Action
                 break;
             default:
                 // application error
-                
-                if (get_class($errors->exception) == 'Zend_Acl_Exception'){
-                    $this->getResponse()->setHttpResponseCode(503);
-                    $priority = Zend_Log::ERR;
-                    $this->view->message = 'Page not allowed';
-                } else {
-                    $this->getResponse()->setHttpResponseCode(500);
-                    $priority = Zend_Log::CRIT;
-                    $this->view->message = 'Application error';
+                switch (get_class($errors->exception)){
+                    case 'Zend_Acl_Exception':
+                        $this->getResponse()->setHttpResponseCode(503);
+                        $priority = Zend_Log::ERR;
+                        $this->view->message = 'Page not allowed';
+                        break;
+                    case 'Zend_Db_Exception':
+                        $this->getResponse()->setHttpResponseCode(500);
+                        $priority = Zend_Log::EMERG;
+                        $this->view->message = 'Application BDD error';
+                        break;
+                    default:
+                        $this->getResponse()->setHttpResponseCode(500);
+                        $priority = Zend_Log::CRIT;
+                        $this->view->message = 'Application error';
+                        break;
                 }
                 break;
         }
