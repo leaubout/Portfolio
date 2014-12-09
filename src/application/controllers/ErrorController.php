@@ -23,13 +23,13 @@ class ErrorController extends Zend_Controller_Action
                 break;
             default:
                 // application error
-                switch (get_class($errors->exception)){
-                    case 'Zend_Acl_Exception':
+                switch (TRUE){
+                    case $errors->exception instanceOf Zend_Acl_Exception:
                         $this->getResponse()->setHttpResponseCode(503);
                         $priority = Zend_Log::ERR;
                         $this->view->message = 'Page not allowed';
                         break;
-                    case 'Zend_Db_Exception':
+                    case $errors->exception instanceOf Zend_Db_Exception: 
                         $this->getResponse()->setHttpResponseCode(500);
                         $priority = Zend_Log::EMERG;
                         $this->view->message = 'Application BDD error';
