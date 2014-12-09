@@ -12,19 +12,24 @@
             $this->headLink()->prependStylesheet("/assets/bootstrap/dist/css/bootstrap.min.css");
             $this->headLink()->prependStylesheet("/assets/bootstrap/dist/css/bootstrap-theme.min.css");
             $this->headLink()->appendStylesheet("//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");
-            $this->headLink()->appendStylesheet("/css/main.css");
+            $this->headLink()->appendStylesheet("/css/demo.css");
+            $this->headLink()->appendStylesheet("/css/component.css");
+            $this->headLink()->appendStylesheet("/css/icons.css");
+            $this->headLink()->appendStylesheet("/css/menu.css");
             
             echo $this->headLink() . PHP_EOL; 
             
             echo $this->headStyle() . PHP_EOL;
+            $this->headScript()->appendFile("/js/modernizr.custom.js");
             
             echo $this->headScript() . PHP_EOL;
         ?>
     </head>
     <body>
 
-    <?//= $this->partial('partials/menu.phtml');?>
 	   <div class="container">
+	   <!-- Push Wrapper -->
+			<div class="mp-pusher" id="mp-pusher">
 	  	   <?php 
             $config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigations.xml', 'nav');	   
 	        $container = new Zend_Navigation($config);
@@ -43,7 +48,7 @@
 	        
 	        /* @var $menu Zend_View_Helper_Navigation_Menu */
 	        $menu = $navigation->menu();
-	        
+	           $menu->setPartial('partials/exemple2.phtml');
 	        echo $menu;
 	        
 	        /* @var $breadcrumbs Zend_View_Helper_Navigation_Breadcrumbs */
@@ -54,20 +59,30 @@
 	   ?>
 	   <div class="header">
          <h3 class="text-muted">Project name</h3>
+         <p><a href="#" id="trigger" class="menu-trigger">Open/Close Menu</a></p>
        </div>
       <?= $this->partial('partials/priorityMessages.phtml', array('priorityMessages'=> $this->priorityMessenger())); ?>
       <?= $this->layout()->content; ?>
       <footer class="footer">
         <p>© Company 2014</p>
       </footer>
+      </div><!-- /pusher -->
 	</div>
 	
 	   <?php 
 	    $this->inlineScript()->prependFile("/assets/bootstrap/dist/js/bootstrap.min.js");
 	    $this->inlineScript()->prependFile("/assets/jquery/dist/jquery.min.js");
+	    $this->inlineScript()->appendFile("/js/classie.js");
+	    $this->inlineScript()->appendFile("/js/mlpushmenu.js");
+	    $this->inlineScript()->appendFile("/js/menu.js");
 	    
 	    echo $this->inlineScript() . PHP_EOL; ?> 
-
-
+	    <!-- 
+        <script>
+			new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ), {
+				type : 'cover'
+			} );
+		</script>
+		 -->
 	</body>
 </html>

@@ -1,0 +1,23 @@
+html,body,.container,.scroller {
+	height: 100%;
+}
+
+.scroller {
+	overflow-y: scroll;
+}
+
+.scroller,.scroller-inner {
+	position: relative;
+}
+
+.container {
+	margin : 0;
+	position: relative;
+	overflow: hidden;
+	background: #34495e;
+}
+
+mp-menu {
+	padding-left: -15px;
+	padding-right: 15px;
+}
