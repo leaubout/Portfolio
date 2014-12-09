@@ -77,12 +77,10 @@ class AuthController extends Zend_Controller_Action
     }
     
     public function logoutAction(){
-
-        $acl = Zend_REgistry::get('Zend_Acl');
         
         $this->_helper->viewRenderer->setNoRender(TRUE);
         
-        $this->view->priorityMessenger('Déconnexion.', 'warning');
+        $this->view->priorityMessenger('Déconnexion.', 'success');
         $this->auth->clearIdentity();
         
         $this->redirect($this->view->url(array(), 'indexIndex'));
