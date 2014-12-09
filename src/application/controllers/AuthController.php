@@ -26,16 +26,7 @@ class AuthController extends Zend_Controller_Action
     
     public function loginAction(){
         $form = new Form_Login();
-        
-        /* @var $acl Zend_Acl */
-        $acl = Zend_REgistry::get('Zend_Acl');
-        if (!$acl->isAllowed($this->userAuth->getRoleId(), 'auth', 'login')){
-            throw new Zend_Acl_Exception('Utilisateur : ' . $this->userAuth->getRoleId()
-                .' -- Resource : authentification'
-                .' -- Privilege : login'
-            );
-        }
-        
+               
         if ($this->getRequest()->isPost()){
             if ($form->isValid($this->getRequest()->getPost())){
                 $login = $form->getValue('login');
@@ -88,13 +79,6 @@ class AuthController extends Zend_Controller_Action
     public function logoutAction(){
 
         $acl = Zend_REgistry::get('Zend_Acl');
-        
-        if (!$acl->isAllowed($this->userAuth->getRoleId(), 'auth', 'logout')){
-            throw new Zend_Acl_Exception('Utilisateur : ' . $this->userAuth->getRoleId()
-                .' -- Resource : authentification'
-                .' -- Privilege : logout'
-            );
-        }
         
         $this->_helper->viewRenderer->setNoRender(TRUE);
         
