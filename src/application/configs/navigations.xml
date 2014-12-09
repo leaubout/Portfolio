@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<nav>
+		<home>
+			<label>Home</label>
+			<route>indexIndex</route>
+			<pages>
+				<error>
+					<label>Error</label>
+					<route>errorError</route>
+					<visible>0</visible>
+				</error>
+			</pages>
+		</home>		
+		<skill>
+			<label>Skill</label>
+			<route>skillIndex</route>
+			<pages>
+				<addSkill>
+					<label>Ajout</label>
+					<route>skillAdd</route>
+					<resource>skill</resource>
+					<privilege>add</privilege>
+				</addSkill>
+				<listSkill>
+					<label>Liste</label>
+					<route>skillList</route>
+					<resource>skill</resource>
+					<privilege>list</privilege>
+				</listSkill>
+			</pages>
+		</skill>
+		<login>
+			<label>Login</label>
+			<route>authLogin</route>
+			<resource>auth</resource>
+			<privilege>login</privilege>
+		</login>
+		<logout>
+			<label>Logout</label>
+			<route>authLogout</route>
+			<resource>auth</resource>
+			<privilege>logout</privilege>
+		</logout>		
+	</nav>
+</config>

@@ -23,9 +23,35 @@
     </head>
     <body>
 
-    <?= $this->partial('partials/menu.phtml');?>
-	<div class="container">
-	  
+    <?//= $this->partial('partials/menu.phtml');?>
+	   <div class="container">
+	  	   <?php 
+            $config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigations.xml', 'nav');	   
+	        $container = new Zend_Navigation($config);
+	        
+	        /* @var $navigation Zend_View_Helper_Navigation */
+	        $navigation = $this->navigation($container);
+	        $navigation->setAcl(Zend_Registry::get('Zend_Acl'));
+	        
+	        $auth = Zend_Auth::getInstance();
+	        if($auth->hasIdentity()){
+	            $userAuth = $auth->getIdentity();
+	        } else {
+	            $userAuth = new Model_User();
+	        }
+	        $navigation->setRole($userAuth);
+	        
+	        /* @var $menu Zend_View_Helper_Navigation_Menu */
+	        $menu = $navigation->menu();
+	        
+	        echo $menu;
+	        
+	        /* @var $breadcrumbs Zend_View_Helper_Navigation_Breadcrumbs */
+	        $breadcrumbs = $navigation->breadcrumbs();
+	        $breadcrumbs->setMinDepth(1);
+	        
+	        echo $breadcrumbs;
+	   ?>
 	   <div class="header">
          <h3 class="text-muted">Project name</h3>
        </div>
