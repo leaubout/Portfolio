@@ -7,11 +7,13 @@ class Model_User implements Zend_Acl_Role_Interface
     private $password;
     private $roleId = 'guest';
     
-    public function getRoleId(){
+    public function getRoleId()
+    {
         return $this->roleId;
     }
     
-    public function setRoleId($roleId){
+    public function setRoleId($roleId)
+    {
         $this->roleId = $roleId;
         return $this;
     }
@@ -30,6 +32,7 @@ class Model_User implements Zend_Acl_Role_Interface
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
 	/**
@@ -46,6 +49,7 @@ class Model_User implements Zend_Acl_Role_Interface
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
 	/**
@@ -62,6 +66,6 @@ class Model_User implements Zend_Acl_Role_Interface
     public function setPassword($password)
     {
         $this->password = $password;
+        return $this;
     }
-
 }

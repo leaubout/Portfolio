@@ -20,11 +20,15 @@ class UserController extends Zend_Controller_Action
     public function addAction()
     {
         $form = new Form_User_Add();
+        
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getPost())) {
+            	
                 $user = new Model_User();
-                $user->setName($form->getValue('name'));
-                $user->setPassword($form->getValue('pass'));
+                
+                $user->setName($form->getValue('name'))
+                	 ->setPassword($form->getValue('pass'));
+                
                 if ($this->userApi->save($user)) {
                     $this->flashMessenger->addMessage('Utilisateur créé');
                     //$this->redirect($this->view->url(array(),'userList'));
@@ -100,6 +104,5 @@ class UserController extends Zend_Controller_Action
         $redirector->setCode(302)
         ->setExit(true)
         ->setGotoRoute(array(), 'userList');
-    }
-    
+    }    
 }

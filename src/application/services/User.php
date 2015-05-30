@@ -6,7 +6,7 @@ class Service_User
     
     public function getUserMapper()
     {
-        if (null === $this->userMapper){
+        if (null === $this->userMapper) {
             $this->userMapper = new Model_Mapper_User();
         }
         return $this->userMapper;
@@ -18,7 +18,8 @@ class Service_User
                     ->getParam('bootstrap')
                     ->getResource('cachemanager')
                     ->getCache('data1');
-        if (!$user = $cache->load('user' . $id)){
+        
+        if (! $user = $cache->load('user' . $id)) {
             $user = $this->getUserMapper()->find($id);
             $cache->save($user);
         }
@@ -35,11 +36,13 @@ class Service_User
         return $this->getUserMapper()->delete($id);
     }
     
-    public function save($user){
+    public function save($user)
+    {
         return $this->getUserMapper()->save($user);
     }
     
-    public function authenticate($obj){
+    public function authenticate($obj)
+    {
         // $user = $service->authenticate($adapter->getResultRowObject(null, 'password'));
         $user = new Model_User();
         
@@ -51,5 +54,4 @@ class Service_User
         
         return $user;
     }
-    
 }

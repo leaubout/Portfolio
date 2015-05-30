@@ -1,12 +1,12 @@
 <?php 
-$this->headLink()->appendStylesheet("//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css");
-$this->inlineScript()->appendFile("//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js");
-$this->inlineScript()->appendFile("//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js");
+	$this->headLink()->appendStylesheet("//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css");
+	$this->inlineScript()->appendFile("//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js");
+	$this->inlineScript()->appendFile("//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js");
 ?>
 <h2>Liste des utilisateurs</h2>
-<hr />
+<hr>
 <a href="<?= $this->url(array(), 'userAdd')?>" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Nouvel utilisateur</a>
-<hr />
+<hr>
 
 <?= count($this->messages) ? '<p>' . implode('<br />',$this->messages) . '</p>' : '' ?>
 
