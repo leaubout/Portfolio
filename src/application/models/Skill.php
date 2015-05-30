@@ -7,21 +7,25 @@ class Model_Skill
      * @var integer
      */
     private $id;
+    
     /**
      * 
      * @var Model_Category
      */
     private $category;
+    
     /**
      * 
      * @var string
      */
     private $description;
+    
     /**
      * 
      * @var string
      */
     private $level;
+    
     /**
      * 
      * @var string
@@ -30,11 +34,10 @@ class Model_Skill
 
     public function __construct(array $data = null)
     {
-       
-        if ($data != null){
-            foreach($data as $key => $value){
+        if ($data != null) {
+        	foreach ($data as $key => $value) {
                 $methodName = 'set' . ucfirst($key);
-                if (method_exists($this, $methodName)){
+                if (method_exists($this, $methodName)) {
                     $this->$methodName($value);
                 }
             }            
@@ -58,7 +61,8 @@ class Model_Skill
         return $this;
     }
     
-    public function getCategory(){
+    public function getCategory()
+    {
         return $this->category;
     }
     
@@ -67,7 +71,8 @@ class Model_Skill
         return $this->getCategory()->getName();
     }
     
-    public function getIdCategory(){
+    public function getIdCategory()
+    {
         return $this->getCategory()->getId();
     }
     

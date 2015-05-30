@@ -16,25 +16,29 @@ class SkillController extends Zend_Controller_Action
         ), null));*/        
     }
     
-    public function addAction(){
+    public function addAction()
+    {
         $form = new Form_Skill_Add();
         
-        if ($this->getRequest()->isPost()){
-            if ($form->isValid($this->getRequest()->getPost())){
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($this->getRequest()->getPost())) {
+            	
                 $skill = new Model_Skill($form->getValidValues($this->getRequest()->getPost()));
-                if ($this->skillApi->save($skill)){
+                
+                if ($this->skillApi->save($skill)) {
                     $this->view->priorityMessenger('Compétence enregistrée.', 'success');
+                    $this->redirect($this->view->url(array(), 'skillList'));
                 } else {
                     $this->view->priorityMessenger('Problème lors de l\'enregistrement de la compétence.', 'warning');
                 }
-                $this->redirect($this->view->url(array(), 'skillList'));
             }
         }
         
         $this->view->form = $form;
     }
     
-    public function editAction(){
+    public function editAction()
+    {
         $form = new Form_Skill_Edit();
         
         $id = (int) $this->getRequest()->getParam('id');
@@ -71,13 +75,13 @@ class SkillController extends Zend_Controller_Action
         }
     }
     
-    public function deleteAction(){
-        
-        //$this->view->skills = $this->skillApi->fetchAll();
-        
+    public function deleteAction()
+    {    
+        //$this->view->skills = $this->skillApi->fetchAll();   
     }
     
-    public function listAction(){
+    public function listAction()
+    {
         $this->view->headTitle("Liste des compétences");
         $this->view->skills = $this->skillApi->fetchAll();
     }
