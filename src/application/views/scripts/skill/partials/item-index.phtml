@@ -1,0 +1,8 @@
+		<tr>
+            <td><?= $this->category?></td>
+            <td style="width:200px;"><?= $this->moreLess($this->description)?></td>
+            <td><?= $this->level?></td>
+            <td><?= $this->experience?></td>
+            <td><a href="<?= $this->url(array('id' => $this->id), 'skillRead')?>" class="btn btn-xs btn-success">
+            		<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;voir</a>
+        </tr> 

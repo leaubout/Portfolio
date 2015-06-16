@@ -1,0 +1,22 @@
+<hr>
+<h4>Aperçu d'une compétence particulière</h4>
+<hr>
+<div class="item">
+	<div class="caption"><?= $this->skill->getNameCategory() ?></div>
+	<div class="label">
+		<p>Description</p>
+		<p><?= $this->skill->getDescription() ?></p>
+	</div>
+	<div class="label">
+		<p>Niveau</p>
+		<p><?= $this->skill->getLevel() ?></p>	
+	</div>
+	<div class="label">
+		<p>Experience</p>
+		<p><?= $this->skill->getExperience() ?></p>	
+	</div>
+</div>
+<hr>
+<a href="<?= $this->url(array(), 'skillIndex')?>" class="btn btn-xs btn-success">
+	<span class="glyphicon glyphicon-list"></span>&nbsp;Liste des compétences</a>
+<hr><br>

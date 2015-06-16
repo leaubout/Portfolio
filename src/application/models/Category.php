@@ -5,9 +5,10 @@ class Model_Category
     private $id;
     private $name;
 
-    public function __construct($id, $name){
+    public function __construct($id, $name)
+    {
         $this->setId($id);
-        $this->name = $name;
+        $this->setName($name);
     }    
     
     /**
@@ -24,6 +25,7 @@ class Model_Category
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
     
     /**
@@ -40,5 +42,6 @@ class Model_Category
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }  
 }

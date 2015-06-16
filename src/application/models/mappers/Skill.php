@@ -4,7 +4,8 @@ class Model_Mapper_Skill
 {    
     private $dbTable;
 
-    public function getDbTable(){
+    public function getDbTable()
+    {
     	if ($this->dbTable === null) {
     		$this->dbTable = new Model_DbTable_Skill();
     	}
@@ -40,7 +41,7 @@ class Model_Mapper_Skill
     }
     
     public function save($skill)
-    {
+    {	
     	$row = $this->objectToRow($skill);
     	if ((int) $skill->getId() === 0) {
     		unset($row[Model_DbTable_Skill::COL_ID]);
@@ -55,7 +56,7 @@ class Model_Mapper_Skill
     {
         return array(
             Model_DbTable_Skill::COL_ID => $skill->getId(),
-            Model_DbTable_Skill::COL_ID_CATEGORY => $skill->getCategory()->getId(),
+            Model_DbTable_Skill::COL_ID_CATEGORY => $skill->getIdCategory(),
             Model_DbTable_Skill::COL_DESCRIPTION => $skill->getDescription(),
             Model_DbTable_Skill::COL_LEVEL => $skill->getLevel(),
             Model_DbTable_Skill::COL_EXPERIENCE => $skill->getExperience()
@@ -66,9 +67,13 @@ class Model_Mapper_Skill
     {
         $skill = new Model_Skill();
         
-        $skill->setId($row[Model_DbTable_Skill::COL_ID])
-        	  ->setCategory($row[Model_DbTable_Skill::COL_ID_CATEGORY])
-              ->setDescription($row[Model_DbTable_Skill::COL_DESCRIPTION])
+        $skill->setId($row[Model_DbTable_Skill::COL_ID]);
+        
+        $mapperCategory = new Model_Mapper_Category();
+        $category = $mapperCategory->getById($row[Model_DbTable_Skill::COL_ID_CATEGORY]);
+        $skill->setCategory($category);
+        
+        $skill->setDescription($row[Model_DbTable_Skill::COL_DESCRIPTION])
               ->setLevel($row[Model_DbTable_Skill::COL_LEVEL])
               ->setExperience($row[Model_DbTable_Skill::COL_EXPERIENCE]);
         

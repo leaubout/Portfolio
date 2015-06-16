@@ -31,9 +31,9 @@ class Model_Mapper_Category
         '14' => 'Mac'    
     );
     
-    public function getById($id){
-        
-        switch (TRUE){
+    public function getById($id)
+    {
+        switch (true) {
             case array_key_exists($id, $this->tabCategoriesTechnologie):
                 $category = new Model_Category($id, $this->tabCategoriesTechnologie[$id]);
                 break;
@@ -49,17 +49,18 @@ class Model_Mapper_Category
         return $category;
     }
     
-    public function getList(){
+    public function getList()
+    {
         return $this->tabCategories;
     }
     
-    public function fetchAll(){
+    public function fetchAll()
+    {
         $tabSubCategories = array();
-        foreach($this->tabCategories as $categorie){
+        foreach ($this->tabCategories as $categorie) {
             $var = 'tabCategories' . ucfirst($categorie);
             $tabSubCategories[$categorie] = $this->$var;
         }
         return $tabSubCategories;
     }
-    
 }

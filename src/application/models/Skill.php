@@ -22,7 +22,7 @@ class Model_Skill
     
     /**
      * 
-     * @var string
+     * @var integer
      */
     private $level;
     
@@ -61,30 +61,45 @@ class Model_Skill
         return $this;
     }
     
+    /**
+     * @return the Model_Category $category
+     */
     public function getCategory()
     {
         return $this->category;
     }
     
+    /**
+     * 
+     * @return the string $category
+     */
     public function getNameCategory()
     {
         return $this->getCategory()->getName();
     }
     
+    /**
+     * 
+     * @return the integer $category
+     */
     public function getIdCategory()
     {
         return $this->getCategory()->getId();
     }
     
     /**
-     * @param field_type $category
+     * 
+     * @param Model_Category|integer $category
      */
-    public function setCategory($idCategory)
+    public function setCategory($category)
     {
-        $mapperCategory = new Model_Mapper_Category();
-        $this->category = $mapperCategory->getById($idCategory);
+		if ($category instanceof Model_Category) {
+			$this->category = $category;
+		} else {
+			$mapperCategory = new Model_Mapper_Category();
+			$this->category = $mapperCategory->getById($category);
+		}
         return $this;
-       
     }
     
 	/**
@@ -136,5 +151,16 @@ class Model_Skill
     {
         $this->experience = $experience;
         return $this;
+    }
+    
+    public function toArray()
+    {
+    	return array(
+    		'id' => $this->getId(),
+    		'category' => $this->getNameCategory(),
+    		'description' => $this->getDescription(),
+    		'level' => $this->getLevel(),
+    		'experience' => $this->getExperience()	
+    	);
     }
 }

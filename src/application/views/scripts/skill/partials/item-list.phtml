@@ -1,0 +1,11 @@
+		<tr>
+            <td><?= $this->id?></td>
+            <td><?= $this->category?></td>
+            <td style="width:200px;"><?= $this->moreLess($this->description)?></td>
+            <td><?= $this->level?></td>
+            <td><?= $this->experience?></td>
+            <td><a href="<?= $this->url(array('id' => $this->id), 'skillEdit')?>" class="btn btn-xs btn-success">
+            		<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Editer</a>
+                <a href="<?= $this->url(array('id' => $this->id), 'skillDelete')?>" class="btn btn-xs btn-danger">
+                	<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Supprimer</a></td>
+        </tr> 
