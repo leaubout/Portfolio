@@ -2,7 +2,7 @@
 
 class Model_DbTable_Skill extends Zend_Db_Table_Abstract
 {
-    const TABLE_NAME = 'skills';
+    const TABLE_NAME = 'skill';
     const COL_ID = 'id';
     const COL_ID_CATEGORY = 'id_category';
     const COL_DESCRIPTION = 'description';
