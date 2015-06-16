@@ -1,15 +1,16 @@
-<div class="coverflow">
-    <div class="cover">A</div>
-    <div class="cover">B</div>
-    ...
-    <div class="cover">Y</div>
-    <div class="cover">Z</div>
-</div>
+<?php if (0 === count($this->webs)) {?>
+<p class="lead">Aucune Webographie</p>
+<?php } else {?>
+  <?= $this->partialLoop('web/partials/item-index.phtml', $this->webs)?>
+<?php }?>
+<?php /*?>
+<?php $this->headStyle('/assets/contentflow.css')?>
+<?php $this->inlineScript(Zend_View_Helper_InlineScript::FILE, '/assets/jqueryui/jquery-ui.min.js')?>
+<?php $this->inlineScript(Zend_View_Helper_InlineScript::FILE, '/assets/ContentFlow/contentflow.js')?>
 
-<script>
-<?php $this->inlineScript()->captureStart();?>
-    $(function() {
-        $('.coverflow').coverflow();
-    });
-<?php $this->inlineScript()->captureEnd();?>    
-</script>
+<?php $this->inlineScript()->captureStart()?>
+$(function() {
+    $('#preview-coverflow').coverflow();
+});
+<?php $this->inlineScript()->captureEnd()?>
+*/ ?>

@@ -1,0 +1,37 @@
+<?php
+    //$this->headLink()->appendStylesheet("./assets/datatables/media/css/jquery.dataTables.min.css");
+	$this->headLink()->appendStylesheet("//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css");
+    $this->inlineScript()->appendFile("//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js");
+    $this->inlineScript()->appendFile("//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js");
+?>
+<h2>Liste Webographique</h2>
+<hr>
+<a href="<?= $this->url(array(), 'webAdd')?>" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Nouvel élement Webographie</a>
+<hr>
+<table id="web" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th style="width: 140px;">Actions</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th style="width: 140px;">Actions</th>
+        </tr>
+    </tfoot>    
+    <tbody>
+        <?= $this->partialLoop('web/partials/item-list.phtml', $this->webs)?>
+    </tbody>
+</table>
+
+<?php $this->inlineScript()->captureStart() ?>
+$(document).ready(function() {
+	$('#web').dataTable();
+} );
+<?php $this->inlineScript()->captureEnd() ?>
